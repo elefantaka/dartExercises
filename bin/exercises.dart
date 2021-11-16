@@ -263,3 +263,75 @@
 //   int number = int.parse(stdin.readLineSync()!);
 //   checkPrime(number);
 // }
+
+// //ex. 11
+//
+// import 'dart:math';
+//
+// List<int> newList(List<int> x) {
+//   return [x.first, x.last];
+// }
+//
+// void main() {
+//   final random = Random();
+//   List<int> a = List.generate(20, (_) => random.nextInt(100));
+//   List<int> b = newList(a);
+//   print(b);
+// }
+
+// //ex. 12
+// import 'dart:io';
+//
+// int fib(int x){
+//   if(x <= 1){
+//     return x;
+//   } else{
+//     return fib(x - 1) + fib(x - 2);
+//   }
+// }
+//
+// void main() {
+//   print("Hello!");
+//   print("Please enter a number");
+//   int number = int.parse(stdin.readLineSync()!);
+//   print(fib(number));
+// }
+
+// //ex. 13
+//
+// import 'dart:math';
+//
+// List<int> newList(List<int> x){
+//   return x.toSet().toList();
+// }
+//
+// void main(){
+//   final random = Random();
+//   List<int> a = List.generate(30, (_) => random.nextInt(100));
+//   print(a);
+//   List<int> b = newList(a);
+//   print(b);
+// }
+
+// //ex. 14
+// import 'dart:io';
+//
+// String reverseSentence(String x){
+//   return x.split(" ").reversed.toList().join(" ");
+// }
+//
+// void main(){
+//   print("Hello");
+//   print("Please enter a sentence");
+//   String? sentence = stdin.readLineSync();
+//   String newSentence = reverseSentence(sentence!);
+//   print(newSentence);
+// }
+
+// //ew. 15   TO DO!!!
+// import 'dart:math';
+//
+// void main(){
+//   final random = Random();
+//   String.fromCharCode(List.generate(10, (index) => random.nextInt(100)));
+// }
