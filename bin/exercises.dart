@@ -328,10 +328,58 @@
 //   print(newSentence);
 // }
 
-// //ew. 15   TO DO!!!
+// //ew. 15
+// import 'dart:convert';
 // import 'dart:math';
+// import 'dart:io';
 //
 // void main(){
-//   final random = Random();
-//   String.fromCharCode(List.generate(10, (index) => random.nextInt(100)));
+//   print("Hello");
+//   print("Please enter how strong the password should be weak - medium - strong.");
+//   String? strength = stdin.readLineSync();
+//   int number = 5;
+//   if(strength == 'weak'){
+//     number = 5;
+//   } else if(strength == 'medium'){
+//     number = 10;
+//   }
+//   else if(strength == 'strong'){
+//     number = 15;
+//   }
+//
+//   generatePassword(number);
 // }
+//
+// void generatePassword(int x) {
+//   final random = Random.secure();
+//   List<int> numbers = List.generate(x, (_) => random.nextInt(255));
+//   List charList = base64UrlEncode(numbers).split('').toList();
+//   charList.shuffle();
+//   print("password ${charList.join('')}");
+// }
+
+//ex. 16
+void main(){
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
