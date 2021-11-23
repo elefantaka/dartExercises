@@ -359,8 +359,120 @@
 // }
 
 //ex. 16
-void main(){
 
+// import 'dart:io';
+// import 'dart:math';
+//
+// void main() {
+//   final random = Random.secure();
+//   String number = (1000 + random.nextInt(9999 - 1000)).toString();
+//   print(number);
+//   print("Hello");
+//   int counter = 0;
+//
+//   while (true) {
+//     print("Please enter a 4-digit number. Enter 'STOP' to close the program");
+//     String? enteredNumber = stdin.readLineSync()!.toLowerCase();
+//     counter++;
+//     int cow = 0;
+//     int bull = 0;
+//     if (number == enteredNumber) {
+//       print("Awesome, you need $counter attempts!");
+//       break;
+//     } else if (enteredNumber == 'stop') {
+//       print("Thank u! Bye");
+//       break;
+//     }
+//     for (int i = 0; i < number.length; i++) {
+//       if (number[i] == enteredNumber![i]) {
+//         cow++;
+//       } else if (number.contains(enteredNumber[i])) {
+//         bull++;
+//       } else if (counter == 4) {
+//         print("The end of the game, your score is $cow cows, $bull bulls and the attempts $counter");
+//         break;
+//       }
+//     }
+//   }
+// }
+
+//ex. 17
+
+// import 'dart:io';
+//
+// void main(){
+//   print("Hello");
+//   print("Please enter a size of the game board!");
+//   int boardSize = int.parse(stdin.readLineSync()!);
+//   draw(boardSize);
+//   // for(int i = 0; i <= boardSize; i++){
+//   //   print(" --- --- --- ");
+//   //   for(int j = 0; j < boardSize-2; j++){
+//   //     if(i != boardSize) {
+//   //       print("|   |   |   |");
+//   //     } else{
+//   //       break;
+//   //     }
+//   //   }
+//   // }
+// }
+//
+// void draw(int x){
+//   String row = " ---";
+//   String col = "|   ";
+//
+//   for(int i = 0; i < x; i++){
+//     print(row * x);
+//     print(col * (x+1));
+//   }
+//   print(row * x);
+// }
+
+//ex. 18
+
+void main() {
+  print("hello, it's tic tac toe game");
+  List<List<int>> game = [[1, 2, 0],[2, 1, 0], [2, 1, 1]];
+  List<List<int>> diagonals = findDiagonals(game);
+  List<List<int>> transpose = trasposeArray(game);
+  print(diagonals);
+  print(transpose);
+  finalGame(game);
+}
+
+//pelna gra
+void finalGame(List<List<int>> x){
+  if(checkRow(x)){
+    print("Row wins");
+  } else if(checkRow(trasposeArray(x))){
+    print("Column wins");
+  } else if(checkRow(findDiagonals(x))){
+    print("Diagonals wins");
+  } else{
+    print("Next time!");
+  }
+}
+
+//sprawdzanie wierszy
+bool checkRow(List<List<int>> x) {
+  for (List<int> y in x) {
+    if (y.toSet().length == 1) {
+      return true;
+    }
+  }
+  return false;
+}
+
+//transponowanie macierzy
+List<List<int>> trasposeArray(List<List<int>> x){
+  return [for(int i = 0; i < x.length; i++) [for(List<int> y in x) y[i]]];
+}
+
+//przekatne
+List<List<int>> findDiagonals(List<List<int>> x){
+  return [[for(var i = 0; i < x.length; i++) x[i][i]],
+    [for(var i = 0; i < x.length; i++) x[i].reversed.toList()[i]]
+  ];
 }
 
 
