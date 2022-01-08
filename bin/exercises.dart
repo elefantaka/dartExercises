@@ -1,4 +1,3 @@
-// //https://hackmd.io/@kuzmapetrovich/S1x90jWGP#Exercise-2
 // //ex. 1
 // import 'dart:io';
 //
@@ -405,16 +404,6 @@
 //   print("Please enter a size of the game board!");
 //   int boardSize = int.parse(stdin.readLineSync()!);
 //   draw(boardSize);
-//   // for(int i = 0; i <= boardSize; i++){
-//   //   print(" --- --- --- ");
-//   //   for(int j = 0; j < boardSize-2; j++){
-//   //     if(i != boardSize) {
-//   //       print("|   |   |   |");
-//   //     } else{
-//   //       break;
-//   //     }
-//   //   }
-//   // }
 // }
 //
 // void draw(int x){
@@ -428,70 +417,141 @@
 //   print(row * x);
 // }
 
-//ex. 18
+// //ex. 18
+//
+// void main() {
+//   print("hello, it's tic tac toe game");
+//   List<List<int>> game = [[1, 2, 0],[2, 1, 0], [2, 1, 1]];
+//   List<List<int>> diagonals = findDiagonals(game);
+//   List<List<int>> transpose = trasposeArray(game);
+//   print(diagonals);
+//   print(transpose);
+//   finalGame(game);
+// }
+//
+// //pelna gra
+// void finalGame(List<List<int>> x){
+//   if(checkRow(x)){
+//     print("Row wins");
+//   } else if(checkRow(trasposeArray(x))){
+//     print("Column wins");
+//   } else if(checkRow(findDiagonals(x))){
+//     print("Diagonals wins");
+//   } else{
+//     print("Next time!");
+//   }
+// }
+//
+// //sprawdzanie wierszy
+// bool checkRow(List<List<int>> x) {
+//   for (List<int> y in x) {
+//     if (y.toSet().length == 1) {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
+//
+// //transponowanie macierzy
+// List<List<int>> trasposeArray(List<List<int>> x){
+//   return [for(int i = 0; i < x.length; i++) [for(List<int> y in x) y[i]]];
+// }
+//
+// //przekatne
+// List<List<int>> findDiagonals(List<List<int>> x){
+//   return [[for(var i = 0; i < x.length; i++) x[i][i]],
+//     [for(var i = 0; i < x.length; i++) x[i].reversed.toList()[i]]
+//   ];
+// }
+
+//ex. 19
+
+// import 'dart:io';
+//
+// void main(){
+//   print("Hello!");
+//   print("Please enter a size of the game board!");
+//   int boardSize = int.parse(stdin.readLineSync()!);
+//   print("Player 1: Please enter the row");
+//   int x1 = int.parse(stdin.readLineSync()!);
+//   print("Player 1: Please enter a column");
+//   int y1 = int.parse(stdin.readLineSync()!);
+//   print("Player 2: Please enter the row");
+//   int x2 = int.parse(stdin.readLineSync()!);
+//   print("Player 2: Please enter a column");
+//   int y2 = int.parse(stdin.readLineSync()!);
+//
+//   draw(boardSize);
+//
+// }
+//
+// void draw(int x){
+//   String row = " ---";
+//   String col = "|   ";
+//
+//   for(int i = 0; i < x; i++){
+//     String temp = col * (x+1);
+//
+//     print(row * x);
+//     stdout.write("$temp X");
+//     stdout.write("\n");
+//   }
+//   print(row * x);
+// }
+
+//ex 21
+
+// import 'dart:io';
+// import 'dart:math';
+//
+// void main() {
+//   print("Hello");
+//   print("The program will guess your number");
+//   final random = Random();
+//   int counter = 0;
+//   int x = random.nextInt(101);
+//   print("The number $x");
+//   while (true) {
+//     print("Please enter if number is correct - yes, too low - higher, too high - lower");
+//     String? userUnswer = stdin.readLineSync();
+//     String correct = 'yes';
+//     String low = 'lower';
+//     String high = 'higher';
+//     counter += 1;
+//     if (userUnswer == correct) {
+//       print("Number guessed! Attempts $counter");
+//       break;
+//     } else if (userUnswer == low) {
+//       x = random.nextInt(x);
+//       print(x);
+//     } else if(userUnswer == high){
+//       x = random.nextInt(100-x);
+//       print(x);
+//     } else if(counter > 5){
+//       print("The program didn't guessed the numer, attempts $counter");
+//       break;
+//     }
+//   }
+// }
+
+//XOR encrypt/decrypt
 
 void main() {
-  print("hello, it's tic tac toe game");
-  List<List<int>> game = [[1, 2, 0],[2, 1, 0], [2, 1, 1]];
-  List<List<int>> diagonals = findDiagonals(game);
-  List<List<int>> transpose = trasposeArray(game);
-  print(diagonals);
-  print(transpose);
-  finalGame(game);
+  final String encrypted = encryptDecrypt("Renata");
+  print("Encrypted message: " + encrypted);
+
+  final String decrypted = encryptDecrypt(encrypted);
+  print("Decrypted message: " + decrypted);
 }
 
-//pelna gra
-void finalGame(List<List<int>> x){
-  if(checkRow(x)){
-    print("Row wins");
-  } else if(checkRow(trasposeArray(x))){
-    print("Column wins");
-  } else if(checkRow(findDiagonals(x))){
-    print("Diagonals wins");
-  } else{
-    print("Next time!");
+String encryptDecrypt(String message) {
+  var key = 5;
+  var output = [];
+
+  for (int i = 0; i < message.length; i++) {
+    var charCode = message.codeUnitAt(i) ^ key;
+    output.add(String.fromCharCode(charCode));
   }
+
+  return output.join("");
 }
-
-//sprawdzanie wierszy
-bool checkRow(List<List<int>> x) {
-  for (List<int> y in x) {
-    if (y.toSet().length == 1) {
-      return true;
-    }
-  }
-  return false;
-}
-
-//transponowanie macierzy
-List<List<int>> trasposeArray(List<List<int>> x){
-  return [for(int i = 0; i < x.length; i++) [for(List<int> y in x) y[i]]];
-}
-
-//przekatne
-List<List<int>> findDiagonals(List<List<int>> x){
-  return [[for(var i = 0; i < x.length; i++) x[i][i]],
-    [for(var i = 0; i < x.length; i++) x[i].reversed.toList()[i]]
-  ];
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
