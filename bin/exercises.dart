@@ -536,22 +536,66 @@
 
 //XOR encrypt/decrypt
 
+// void main() {
+//   final String encrypted = encryptDecrypt("Renata");
+//   print("Encrypted message: " + encrypted);
+//
+//   final String decrypted = encryptDecrypt(encrypted);
+//   print("Decrypted message: " + decrypted);
+// }
+//
+// String encryptDecrypt(String message) {
+//   var key = 5;
+//   var output = [];
+//
+//   for (int i = 0; i < message.length; i++) {
+//     var charCode = message.codeUnitAt(i) ^ key;
+//     output.add(String.fromCharCode(charCode));
+//   }
+//
+//   return output.join("");
+// }
+
+// Cesar cipher encrypt/decrypt
+
 void main() {
-  final String encrypted = encryptDecrypt("Renata");
+  final String message = "RENATA";
+  final int key = 17;
+
+  final String encrypted = encrypt(message, key);
   print("Encrypted message: " + encrypted);
 
-  final String decrypted = encryptDecrypt(encrypted);
+  final String decrypted = decrypt(encrypted, key);
   print("Decrypted message: " + decrypted);
 }
 
-String encryptDecrypt(String message) {
-  var key = 5;
-  var output = [];
+int toCharCode(String string) {
+  return string.codeUnitAt(0);
+}
 
+String fromCharCode(int character) {
+  return String.fromCharCodes([character]);
+}
+
+String cesar(String message, int key) {
+  StringBuffer stringBuffer = StringBuffer();
   for (int i = 0; i < message.length; i++) {
-    var charCode = message.codeUnitAt(i) ^ key;
-    output.add(String.fromCharCode(charCode));
+    int character = message.codeUnitAt(i);
+    if (character >= toCharCode('A') && character <= toCharCode('Z')) {
+      stringBuffer.write(fromCharCode(toCharCode("A") + (character - toCharCode("A") + key) % 26));
+    } else if (character >= toCharCode('a') && character <= toCharCode('z')) {
+      stringBuffer.write(fromCharCode(toCharCode("a") + (character - toCharCode("a") + key) % 26));
+    } else {
+      stringBuffer.write(message[i]);
+    }
   }
+  return stringBuffer.toString();
+}
 
-  return output.join("");
+String encrypt(String message, int key) {
+  return cesar(message, key);
+}
+
+String decrypt(String message, int key) {
+  return cesar(message, 26 - key);
 }
