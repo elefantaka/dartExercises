@@ -558,44 +558,325 @@
 
 // Cesar cipher encrypt/decrypt
 
-void main() {
-  final String message = "RENATA";
-  final int key = 17;
+// void main() {
+//   final String message = "RENATA";
+//   final int key = 17;
+//
+//   final String encrypted = encrypt(message, key);
+//   print("Encrypted message: " + encrypted);
+//
+//   final String decrypted = decrypt(encrypted, key);
+//   print("Decrypted message: " + decrypted);
+// }
+//
+// int toCharCode(String string) {
+//   return string.codeUnitAt(0);
+// }
+//
+// String fromCharCode(int character) {
+//   return String.fromCharCodes([character]);
+// }
+//
+// String cesar(String message, int key) {
+//   StringBuffer stringBuffer = StringBuffer();
+//   for (int i = 0; i < message.length; i++) {
+//     int character = message.codeUnitAt(i);
+//     if (character >= toCharCode('A') && character <= toCharCode('Z')) {
+//       stringBuffer.write(fromCharCode(toCharCode("A") + (character - toCharCode("A") + key) % 26));
+//     } else if (character >= toCharCode('a') && character <= toCharCode('z')) {
+//       stringBuffer.write(fromCharCode(toCharCode("a") + (character - toCharCode("a") + key) % 26));
+//     } else {
+//       stringBuffer.write(message[i]);
+//     }
+//   }
+//   return stringBuffer.toString();
+// }
+//
+// String encrypt(String message, int key) {
+//   return cesar(message, key);
+// }
+//
+// String decrypt(String message, int key) {
+//   return cesar(message, 26 - key);
+// }
 
-  final String encrypted = encrypt(message, key);
-  print("Encrypted message: " + encrypted);
+//
+// import 'dart:io';
+//
+// void main() {
+//   //print(singleDigits);
+//   print('Please enter the number');
+//   int? digit = int.parse(stdin.readLineSync()!);
+//   String phrase = convertToWords(digit);
+//   print(phrase);
+// }
+//
+// int toCharCode(String string) {
+//   return string.codeUnitAt(0);
+// }
+//
+// String fromCharCode(int character) {
+//   return String.fromCharCodes([character]);
+// }
+//
+// String convertToWords(int number) {
+//   final List<String> singleDigits = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+//   final List<String> twoDigits = ['', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+//   final List<String> tensDigits = ['', '', 'twenty', 'thirty', 'fourty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+//   final List<String> moreDigits = ['hundred', 'thousand'];
+//
+//   int length = number.toString().length;
+//
+//   String phrase = 'something';
+//   String phraseTemp = '';
+//
+//
+//   if (length == 0) {
+//     phrase = 'Empty string';
+//     return phrase;
+//   }
+//   if (length > 4) {
+//     phrase = 'Length more than 4 is not supported';
+//     return phrase;
+//   }
+//   //DIGITS 0-9
+//   if (length == 1) {
+//     int index = toCharCode(number.toString()) - toCharCode("0");
+//     phrase = singleDigits[index];
+//     return phrase;
+//   }
+//
+//   int x = 0;
+//
+//   while (x <= length) {
+//     //DIGITS 100-1000
+//     if (length >= 3) {
+//       if (toCharCode(number.toString()[x]) - toCharCode("0") != 0) {
+//         String phrase1 = singleDigits[toCharCode(number.toString()[x]) - toCharCode("0")];
+//         String phrase2 = moreDigits[length - 3];
+//         phraseTemp = phraseTemp + phrase1 + ' ' + phrase2 + ' ';
+//       }
+//       length--;
+//     } else {
+//       //DIGITS 10-19
+//       if (toCharCode(number.toString()[x]) - toCharCode("0") == 1) {
+//         int index = toCharCode(number.toString()[x]) - toCharCode("0") + toCharCode(number.toString()[x + 1]) - toCharCode("0");
+//         phrase = twoDigits[index];
+//         print(length);
+//         if(x <= 2){
+//           String newPhrase = phraseTemp + phrase;
+//           return newPhrase;
+//         } else {
+//           return phrase;
+//         }
+//       }
+//       //DIGIT 20
+//       else if (toCharCode(number.toString()[x]) - toCharCode("0") == 2 && toCharCode(number.toString()[x + 1]) - toCharCode("0") == 0) {
+//         phrase = 'twenty';
+//         if(x <= 2){
+//           return phraseTemp + phrase;
+//         } else {
+//           return phrase;
+//         }
+//       } else {
+//         int i = toCharCode(number.toString()[x]) - toCharCode("0");
+//         if (i > 0) {
+//           phrase = tensDigits[i];
+//           return phrase;
+//         }
+//         x++;
+//         if (toCharCode(number.toString()[x]) - toCharCode("0") != 0) {
+//           print(number.toString()[x]);
+//           int temp = toCharCode(number.toString()[x]) - toCharCode("0");
+//           phrase = singleDigits[temp];
+//           return phrase;
+//         }
+//       }
+//     }
+//     x++;
+//   }
+//   return 'return koncowy';
+// }
 
-  final String decrypted = decrypt(encrypted, key);
-  print("Decrypted message: " + decrypted);
+
+import 'dart:io';
+
+void main(){
+  print('Please enter the number');
+  int? digit = int.parse(stdin.readLineSync()!);
+
+  String phrase = _convert(digit);
+  print(phrase);
+
 }
 
-int toCharCode(String string) {
-  return string.codeUnitAt(0);
-}
+String _convertLessThanOneThousand(int number){
+  final tensNames = ["", " ten", " twenty", " thirty", " forty", " fifty", " sixty", " seventy", " eighty", " ninety"];
 
-String fromCharCode(int character) {
-  return String.fromCharCodes([character]);
-}
+  final numNames = [
+    "",
+    " one",
+    " two",
+    " three",
+    " four",
+    " five",
+    " six",
+    " seven",
+    " eight",
+    " nine",
+    " ten",
+    " eleven",
+    " twelve",
+    " thirteen",
+    " fourteen",
+    " fifteen",
+    " sixteen",
+    " seventeen",
+    " eighteen",
+    " nineteen"
+  ];
 
-String cesar(String message, int key) {
-  StringBuffer stringBuffer = StringBuffer();
-  for (int i = 0; i < message.length; i++) {
-    int character = message.codeUnitAt(i);
-    if (character >= toCharCode('A') && character <= toCharCode('Z')) {
-      stringBuffer.write(fromCharCode(toCharCode("A") + (character - toCharCode("A") + key) % 26));
-    } else if (character >= toCharCode('a') && character <= toCharCode('z')) {
-      stringBuffer.write(fromCharCode(toCharCode("a") + (character - toCharCode("a") + key) % 26));
-    } else {
-      stringBuffer.write(message[i]);
-    }
+  final zero = "zero";
+  final hundred = "hundred";
+  final thousand = "thousand";
+  final oneThousand = "one thousand";
+  final million = "million";
+  final billion = "billion";
+
+  String soFar;
+
+  //1-999
+  if(number % 100 < 20){
+    soFar = numNames[number % 100];
+    number = (number ~/ 100).toInt();
+  } else{
+    soFar = numNames[number % 10];
+    number = (number ~/10).toInt();
+
+    soFar = tensNames[number % 10] + soFar;
+    number = (number ~/ 10).toInt();
   }
-  return stringBuffer.toString();
+  if(number == 0){
+    return soFar;
+  }
+  return numNames[number] + ' ' + hundred + soFar;
 }
 
-String encrypt(String message, int key) {
-  return cesar(message, key);
+//0 - 999 999 999
+String _convert(int number){
+  final tensNames = ["", " ten", " twenty", " thirty", " forty", " fifty", " sixty", " seventy", " eighty", " ninety"];
+
+  final numNames = [
+    "",
+    " one",
+    " two",
+    " three",
+    " four",
+    " five",
+    " six",
+    " seven",
+    " eight",
+    " nine",
+    " ten",
+    " eleven",
+    " twelve",
+    " thirteen",
+    " fourteen",
+    " fifteen",
+    " sixteen",
+    " seventeen",
+    " eighteen",
+    " nineteen"
+  ];
+
+  final zero = "zero";
+  final hundred = "hundred";
+  final thousand = "thousand";
+  final oneThousand = "one thousand";
+  final million = "million";
+  final billion = "billion";
+
+  if(number == 0){
+    return zero;
+  }
+
+  String snumber = number.toString().padLeft(9, "0");
+  // nnnXXXnnnnnn
+  int millions = int.parse(snumber.substring(0, 3));
+  // nnnnnnXXXnnn
+  int hundredThousands = int.parse(snumber.substring(3, 6));
+  // nnnnnnnnnXXX
+  int thousands = int.parse(snumber.substring(6, 9));
+
+  String tradMillions = getMillions(millions);
+  String result = tradMillions;
+
+  String tradHundredThousand = getThousands(hundredThousands);
+  result = result + tradHundredThousand;
+
+  String tradThousand = _convertLessThanOneThousand(thousands);
+  result = result + tradThousand;
+
+  return result;
 }
 
-String decrypt(String message, int key) {
-  return cesar(message, 26 - key);
+String getMillions(int millions) {
+
+  final zero = "zero";
+  final hundred = "hundred";
+  final thousand = "thousand";
+  final oneThousand = "one thousand";
+  final million = "million";
+  final billion = "billion";
+
+  String tradMillions;
+  switch (millions) {
+    case 0:
+      tradMillions = "";
+      break;
+    case 1:
+      tradMillions = _convertLessThanOneThousand(millions) + million;
+      break;
+    default:
+      tradMillions = _convertLessThanOneThousand(millions) + million;
+  }
+  return tradMillions;
 }
+
+String getThousands(int hundredThousands) {
+  final zero = "zero";
+  final hundred = "hundred";
+  final thousand = "thousand";
+  final oneThousand = "one thousand";
+  final million = "million";
+  final billion = "billion";
+
+  String tradHundredThousands;
+  switch (hundredThousands) {
+    case 0:
+      tradHundredThousands = "";
+      break;
+    case 1:
+      tradHundredThousands =
+          _convertLessThanOneThousand(hundredThousands) + thousand;
+      break;
+    default:
+      tradHundredThousands =
+          _convertLessThanOneThousand(hundredThousands) + thousand;
+  }
+
+  return tradHundredThousands;
+}
+
+bool isNumeric(String nums) {
+if (nums == null || nums.trim().isEmpty) {
+return false;
+}
+
+return double.tryParse(nums) != null;
+}
+
+
+
+
+
